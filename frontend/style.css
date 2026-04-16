@@ -137,7 +137,17 @@ button { cursor: pointer; border: none; background: none; }
     top: 0; left: 0; right: 0;
     height: 2px;
 }
-.stat-card--total::before { background: linear-gradient(90deg, var(--accent), transparent); }
+.stat-card--total {
+    background: linear-gradient(135deg, #2bc1c5 0%, #0d6e75 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 24px rgba(13, 110, 117, 0.3);
+    border-radius: 20px;
+}
+.stat-card--total .stat-label { color: rgba(255, 255, 255, 0.85); }
+.stat-card--total .stat-value { color: #ffffff; }
+.stat-card--total .stat-sub { color: rgba(255, 255, 255, 0.7); }
+.stat-card--total::before { display: none; }
+
 .stat-card--month::before  { background: linear-gradient(90deg, var(--blue), transparent); }
 .stat-card--top::before    { background: linear-gradient(90deg, var(--purple), transparent); }
 .stat-card:hover { border-color: var(--border-light); transform: translateY(-2px); }
@@ -293,8 +303,8 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
 .btn-submit {
     width: 100%;
-    background: var(--accent);
-    color: #000;
+    background: linear-gradient(135deg, #2bc1c5 0%, #0d6e75 100%);
+    color: #fff;
     border-radius: var(--radius-sm);
     padding: 12px 20px;
     font-family: var(--font-display);
