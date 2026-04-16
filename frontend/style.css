@@ -158,23 +158,42 @@ button { cursor: pointer; border: none; background: none; }
     background: linear-gradient(-45deg, #2bc1c5, #0d6e75, #178b8f, #0cebeb);
     background-size: 400% 400%;
     animation: gradientShift 6s ease infinite;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 24px rgba(13, 110, 117, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.3), 0 10px 24px rgba(13, 110, 117, 0.4);
     border-radius: 20px;
 }
+.stat-card--month {
+    background: linear-gradient(-45deg, #4d9fff, #1a56a3, #3584d7, #4d9fff);
+    background-size: 400% 400%;
+    animation: gradientShift 6s ease infinite;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.3), 0 10px 24px rgba(26, 86, 163, 0.4);
+    border-radius: 20px;
+}
+.stat-card--top {
+    background: linear-gradient(-45deg, #a06bff, #4b2691, #7d44d1, #a06bff);
+    background-size: 400% 400%;
+    animation: gradientShift 6s ease infinite;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.3), 0 10px 24px rgba(75, 38, 145, 0.4);
+    border-radius: 20px;
+}
+
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
-.stat-card--total .stat-label { color: rgba(255, 255, 255, 0.85); }
-.stat-card--total .stat-value { color: #ffffff; }
-.stat-card--total .stat-sub { color: rgba(255, 255, 255, 0.7); }
-.stat-card--total::before { display: none; }
 
-.stat-card--month::before  { background: linear-gradient(90deg, var(--blue), transparent); }
-.stat-card--top::before    { background: linear-gradient(90deg, var(--purple), transparent); }
-.stat-card:hover { border-color: var(--border-light); transform: translateY(-2px); }
+.stat-card .stat-label { color: rgba(255, 255, 255, 0.85); }
+.stat-card .stat-value { color: #ffffff; }
+.stat-card .stat-sub { color: rgba(255, 255, 255, 0.7); }
+
+.stat-card--total::before { background: linear-gradient(90deg, rgba(255,255,255,0.7), transparent); }
+.stat-card--month::before { background: linear-gradient(90deg, rgba(255,255,255,0.7), transparent); }
+.stat-card--top::before   { background: linear-gradient(90deg, rgba(255,255,255,0.7), transparent); }
+
+.stat-card:hover { border-color: rgba(255, 255, 255, 0.4); transform: translateY(-4px); }
 .stat-label {
     font-size: 11px;
     font-weight: 600;
