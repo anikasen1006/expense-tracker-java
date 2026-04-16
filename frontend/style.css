@@ -106,6 +106,23 @@ button { cursor: pointer; border: none; background: none; }
     font-size: 12px;
     color: var(--text-secondary);
     letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.profile-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 12px var(--accent-dim);
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.profile-avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 16px rgba(12, 235, 235, 0.4);
 }
 
 /* ── MAIN ───────────────────────────────────────── */
@@ -138,10 +155,17 @@ button { cursor: pointer; border: none; background: none; }
     height: 2px;
 }
 .stat-card--total {
-    background: linear-gradient(135deg, #2bc1c5 0%, #0d6e75 100%);
+    background: linear-gradient(-45deg, #2bc1c5, #0d6e75, #178b8f, #0cebeb);
+    background-size: 400% 400%;
+    animation: gradientShift 6s ease infinite;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 10px 24px rgba(13, 110, 117, 0.3);
     border-radius: 20px;
+}
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 .stat-card--total .stat-label { color: rgba(255, 255, 255, 0.85); }
 .stat-card--total .stat-value { color: #ffffff; }
