@@ -19,9 +19,9 @@
     --text-secondary: #7a8099;
     --text-muted:     #3d4358;
 
-    --accent:         #00e5a0;
-    --accent-dim:     rgba(0, 229, 160, 0.12);
-    --accent-hover:   #00ffb3;
+    --accent:         #0cebeb;
+    --accent-dim:     rgba(12, 235, 235, 0.12);
+    --accent-hover:   #20e3b2;
 
     --red:            #ff4d6a;
     --red-dim:        rgba(255, 77, 106, 0.1);
@@ -48,16 +48,16 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; scroll-behavior: smooth; }
 body {
-    background: var(--bg-base);
+    background-color: var(--bg-base);
     color: var(--text-primary);
     font-family: var(--font-body);
     min-height: 100vh;
     line-height: 1.6;
-    /* Subtle grid texture */
-    background-image:
-        linear-gradient(rgba(0,229,160,0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,229,160,0.015) 1px, transparent 1px);
-    background-size: 40px 40px;
+    /* Soft glowing aura matching dribbble background */
+    background-image: 
+        radial-gradient(circle at 10% 40%, rgba(38, 204, 219, 0.1), transparent 40%),
+        radial-gradient(circle at 85% 60%, rgba(123, 62, 184, 0.1), transparent 45%);
+    background-attachment: fixed;
 }
 input, select, button { font-family: inherit; }
 button { cursor: pointer; border: none; background: none; }
@@ -185,9 +185,12 @@ button { cursor: pointer; border: none; background: none; }
 
 /* ── PANELS ─────────────────────────────────────── */
 .panel {
-    background: var(--bg-panel);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
+    background: rgba(17, 19, 24, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
     overflow: hidden;
 }
 .panel-header {
@@ -419,22 +422,27 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
 /* ── EXPENSE CARD ───────────────────────────────── */
 .expense-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
+    background: rgba(19, 22, 29, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
     padding: 16px;
     display: grid;
     grid-template-columns: auto 1fr auto;
     gap: 14px;
     align-items: center;
-    transition: border-color var(--transition), transform var(--transition), opacity var(--transition);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     animation: slideIn 0.25s ease forwards;
 }
 @keyframes slideIn {
     from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
 }
-.expense-card:hover { border-color: var(--border-light); transform: translateX(3px); }
+.expense-card:hover { 
+    background: rgba(30, 35, 45, 0.9);
+    border-color: rgba(43, 193, 197, 0.3); 
+    transform: translateY(-4px) scale(1.02); 
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
 .expense-card.removing {
     opacity: 0;
     transform: translateX(-20px);
