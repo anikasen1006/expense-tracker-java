@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8080/expenses';
+const API_BASE = 'https://expense-tracker-java-pkqx.onrender.com';
 
 const CATEGORY_EMOJI = {
     'Food':          '🍔',
