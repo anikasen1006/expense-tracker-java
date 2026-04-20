@@ -4,12 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ExpenseIQ — Smart Expense Tracker</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
     <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+
+<!-- ✅ NEW LAYOUT WRAPPER -->
+<div class="layout">
+
+    <!-- ✅ SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">◈</span>
+            <span class="logo-text">ExpenseIQ</span>
+        </div>
+
+        <ul class="menu">
+            <li class="active">🏠 Dashboard</li>
+            <li>📋 Expenses</li>
+            <li>💰 Budgets</li>
+            <li>📊 Reports</li>
+            <li>🎯 Goals</li>
+            <li>⚙️ Settings</li>
+        </ul>
+    </aside>
+
+    <!-- ✅ MAIN CONTENT WRAPPER -->
+    <div class="main-content">
+
+    <!-- ── HEADER ─────────────────────────────────────── -->
     <header class="header">
         <div class="header-inner">
             <div class="logo">
@@ -53,14 +81,7 @@
 
                     <div class="field-group">
                         <label class="field-label" for="title">Title</label>
-                        <input
-                            type="text"
-                            id="title"
-                            class="field-input"
-                            placeholder="e.g. Grocery shopping"
-                            maxlength="100"
-                            required
-                        />
+                        <input type="text" id="title" class="field-input" placeholder="e.g. Grocery shopping" maxlength="100" required />
                         <span class="field-error" id="titleError"></span>
                     </div>
 
@@ -68,15 +89,7 @@
                         <label class="field-label" for="amount">Amount (₹)</label>
                         <div class="input-prefix-wrap">
                             <span class="input-prefix">₹</span>
-                            <input
-                                type="number"
-                                id="amount"
-                                class="field-input field-input--prefixed"
-                                placeholder="0.00"
-                                min="0.01"
-                                step="0.01"
-                                required
-                            />
+                            <input type="number" id="amount" class="field-input field-input--prefixed" placeholder="0.00" min="0.01" step="0.01" required />
                         </div>
                         <span class="field-error" id="amountError"></span>
                     </div>
@@ -103,12 +116,7 @@
 
                     <div class="field-group">
                         <label class="field-label" for="date">Date</label>
-                        <input
-                            type="date"
-                            id="date"
-                            class="field-input"
-                            required
-                        />
+                        <input type="date" id="date" class="field-input" required />
                         <span class="field-error" id="dateError"></span>
                     </div>
 
@@ -156,12 +164,13 @@
                 </div>
 
                 <div class="expense-list" id="expenseList"></div>
-
             </section>
+
         </div>
 
     </main>
 
+<<<<<<< HEAD
     <div class="modal-overlay" id="modalOverlay" style="display:none">
         <div class="modal">
             <div class="modal-icon">⚠</div>
@@ -172,10 +181,17 @@
                 <button class="btn-delete-confirm" id="modalConfirm">Delete</button>
             </div>
         </div>
+=======
+>>>>>>> ac2412d (added Procfile and updates)
     </div>
+</div>
 
+<<<<<<< HEAD
     <div class="toast" id="toast"></div>
+=======
+<!-- ✅ CLOSING TAGS (as you asked) -->
+<script src="app.js"></script>
+>>>>>>> ac2412d (added Procfile and updates)
 
-    <script src="app.js"></script>
 </body>
 </html>
