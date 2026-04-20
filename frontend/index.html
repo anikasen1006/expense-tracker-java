@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-    <!-- ── HEADER ─────────────────────────────────────── -->
     <header class="header">
         <div class="header-inner">
             <div class="logo">
@@ -26,8 +24,6 @@
     </header>
 
     <main class="main">
-
-        <!-- ── STAT CARDS ─────────────────────────────── -->
         <section class="stats-grid">
             <div class="stat-card stat-card--total">
                 <div class="stat-label">Total Spent</div>
@@ -46,10 +42,7 @@
             </div>
         </section>
 
-        <!-- ── MAIN CONTENT GRID ─────────────────────── -->
         <div class="content-grid">
-
-            <!-- LEFT: Add Expense Form -->
             <aside class="panel panel--form">
                 <div class="panel-header">
                     <h2 class="panel-title">Add Expense</h2>
@@ -128,7 +121,6 @@
 
                 </form>
 
-                <!-- Category Breakdown -->
                 <div class="breakdown-panel">
                     <h3 class="breakdown-title">Category Breakdown</h3>
                     <div id="categoryBreakdown" class="breakdown-list">
@@ -138,7 +130,6 @@
 
             </aside>
 
-            <!-- RIGHT: Expense List -->
             <section class="panel panel--list">
                 <div class="panel-header">
                     <h2 class="panel-title">Expenses</h2>
@@ -153,20 +144,17 @@
                     </div>
                 </div>
 
-                <!-- Loading state -->
                 <div class="loading-state" id="loadingState">
                     <div class="spinner"></div>
                     <span>Loading expenses…</span>
                 </div>
 
-                <!-- Empty state -->
                 <div class="empty-state" id="emptyState" style="display:none">
                     <div class="empty-icon">◈</div>
                     <p class="empty-title">No expenses yet</p>
                     <p class="empty-sub">Add your first expense using the form.</p>
                 </div>
 
-                <!-- Expense Cards -->
                 <div class="expense-list" id="expenseList"></div>
 
             </section>
@@ -174,7 +162,6 @@
 
     </main>
 
-    <!-- ── DELETE CONFIRM MODAL ─────────────────────── -->
     <div class="modal-overlay" id="modalOverlay" style="display:none">
         <div class="modal">
             <div class="modal-icon">⚠</div>
@@ -187,7 +174,6 @@
         </div>
     </div>
 
-    <!-- ── TOAST NOTIFICATION ──────────────────────── -->
     <div class="toast" id="toast"></div>
 
     <script src="app.js"></script>

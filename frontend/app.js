@@ -1,20 +1,5 @@
-/**
- * ExpenseIQ — Frontend JavaScript
- * Connects to the Spring Boot backend at http://localhost:8080
- *
- * Architecture:
- *   - API module: all fetch() calls to backend
- *   - State: in-memory list of expenses
- *   - UI: render functions that update the DOM
- *   - Events: form submit, delete, filter
- */
-
-// ──────────────────────────────────────────────────
-// CONFIGURATION
-// ──────────────────────────────────────────────────
 const API_BASE = 'http://localhost:8080/expenses';
 
-// Category → emoji mapping
 const CATEGORY_EMOJI = {
     'Food':          '🍔',
     'Transport':     '🚗',
@@ -27,26 +12,18 @@ const CATEGORY_EMOJI = {
     'Other':         '📦',
 };
 
-// ──────────────────────────────────────────────────
-// STATE
-// ──────────────────────────────────────────────────
-let allExpenses = [];           // Full list from backend
-let filteredExpenses = [];      // List after category filter
-let pendingDeleteId = null;     // ID of expense pending delete
+let allExpenses = [];
+let filteredExpenses = [];
+let pendingDeleteId = null;
 
-// ──────────────────────────────────────────────────
-// API MODULE — all backend calls live here
-// ──────────────────────────────────────────────────
 const api = {
 
-    /** GET /expenses → all expenses */
     async fetchAll() {
         const res = await fetch(API_BASE);
         if (!res.ok) throw new Error('Failed to fetch expenses');
         return res.json();
     },
 
-    /** POST /expenses → add a new expense */
     async addExpense(data) {
         const res = await fetch(API_BASE, {
             method: 'POST',
@@ -54,11 +31,10 @@ const api = {
             body: JSON.stringify(data),
         });
         const json = await res.json();
-        if (!res.ok) throw json; // Let caller handle validation errors
+        if (!res.ok) throw json;
         return json;
     },
 
-    /** DELETE /expenses/{id} → remove expense */
     async deleteExpense(id) {
         const res = await fetch(`${API_BASE}/${id}`, { method: 'DELETE' });
         if (!res.ok) throw new Error('Failed to delete expense');
@@ -66,11 +42,6 @@ const api = {
     },
 };
 
-// ──────────────────────────────────────────────────
-// UTILITY FUNCTIONS
-// ──────────────────────────────────────────────────
-
-/** Format a number as Indian Rupee currency */
 function formatINR(amount) {
     return '₹' + parseFloat(amount).toLocaleString('en-IN', {
         minimumFractionDigits: 2,
@@ -78,7 +49,6 @@ function formatINR(amount) {
     });
 }
 
-/** Format ISO date string to "13 Apr 2025" */
 function formatDate(dateStr) {
     const date = new Date(dateStr + 'T00:00:00');
     return date.toLocaleDateString('en-IN', {
@@ -86,7 +56,6 @@ function formatDate(dateStr) {
     });
 }
 
-/** Check if a date string is in the current month */
 function isThisMonth(dateStr) {
     const date = new Date(dateStr + 'T00:00:00');
     const now  = new Date();
@@ -94,7 +63,6 @@ function isThisMonth(dateStr) {
            date.getFullYear() === now.getFullYear();
 }
 
-/** Show a toast notification */
 function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
     toast.textContent = message;
@@ -102,28 +70,20 @@ function showToast(message, type = 'success') {
     setTimeout(() => { toast.className = 'toast'; }, 3000);
 }
 
-/** Show/hide the loading spinner */
 function setLoading(visible) {
     document.getElementById('loadingState').style.display = visible ? 'block' : 'none';
 }
 
-// ──────────────────────────────────────────────────
-// STAT CARDS
-// ──────────────────────────────────────────────────
-
 function updateStats(expenses) {
-    // Total
     const total = expenses.reduce((sum, e) => sum + parseFloat(e.amount), 0);
     document.getElementById('totalAmount').textContent = formatINR(total);
     document.getElementById('totalCount').textContent  = `${expenses.length} expense${expenses.length !== 1 ? 's' : ''}`;
 
-    // This month
     const monthExpenses = expenses.filter(e => isThisMonth(e.date));
     const monthTotal = monthExpenses.reduce((sum, e) => sum + parseFloat(e.amount), 0);
     document.getElementById('monthAmount').textContent = formatINR(monthTotal);
     document.getElementById('monthCount').textContent  = `${monthExpenses.length} this month`;
 
-    // Top category
     const categoryTotals = {};
     expenses.forEach(e => {
         categoryTotals[e.category] = (categoryTotals[e.category] || 0) + parseFloat(e.amount);
@@ -165,10 +125,6 @@ function updateCategoryBreakdown(categoryTotals, grandTotal) {
     }).join('');
 }
 
-// ──────────────────────────────────────────────────
-// CATEGORY FILTER DROPDOWN
-// ──────────────────────────────────────────────────
-
 function populateCategoryFilter(expenses) {
     const categories  = [...new Set(expenses.map(e => e.category))].sort();
     const filterEl    = document.getElementById('filterCategory');
@@ -177,10 +133,6 @@ function populateCategoryFilter(expenses) {
     filterEl.innerHTML = '<option value="">All Categories</option>' +
         categories.map(c => `<option value="${c}"${c === currentVal ? ' selected' : ''}>${CATEGORY_EMOJI[c] || '📦'} ${c}</option>`).join('');
 }
-
-// ──────────────────────────────────────────────────
-// EXPENSE LIST RENDERING
-// ──────────────────────────────────────────────────
 
 function renderExpenses(expenses) {
     const list     = document.getElementById('expenseList');
@@ -219,16 +171,11 @@ function createCardHTML(expense) {
     `;
 }
 
-/** Sanitize user content before rendering to prevent XSS */
 function escapeHTML(str) {
     const div = document.createElement('div');
     div.textContent = str;
     return div.innerHTML;
 }
-
-// ──────────────────────────────────────────────────
-// LOAD ALL EXPENSES (main data fetch)
-// ──────────────────────────────────────────────────
 
 async function loadExpenses() {
     setLoading(true);
@@ -236,9 +183,9 @@ async function loadExpenses() {
 
     try {
         allExpenses = await api.fetchAll();
-        applyFilter();                          // renders filtered list
-        updateStats(allExpenses);               // stats always use all data
-        populateCategoryFilter(allExpenses);    // update filter dropdown
+        applyFilter();
+        updateStats(allExpenses);
+        populateCategoryFilter(allExpenses);
     } catch (err) {
         console.error('Load error:', err);
         showToast('Could not connect to backend. Is Spring Boot running?', 'error');
@@ -247,10 +194,6 @@ async function loadExpenses() {
         setLoading(false);
     }
 }
-
-// ──────────────────────────────────────────────────
-// FILTER
-// ──────────────────────────────────────────────────
 
 function applyFilter() {
     const category  = document.getElementById('filterCategory').value;
@@ -263,10 +206,6 @@ function applyFilter() {
     clearBtn.style.display = category ? 'inline-block' : 'none';
     renderExpenses(filteredExpenses);
 }
-
-// ──────────────────────────────────────────────────
-// FORM — ADD EXPENSE
-// ──────────────────────────────────────────────────
 
 function clearFieldErrors() {
     ['title', 'amount', 'category', 'date'].forEach(field => {
@@ -325,7 +264,6 @@ async function handleFormSubmit(e) {
     try {
         await api.addExpense({ title, amount: parseFloat(amount), category, date });
 
-        // Reset form
         document.getElementById('expenseForm').reset();
         document.getElementById('date').value = new Date().toISOString().split('T')[0];
 
@@ -334,12 +272,11 @@ async function handleFormSubmit(e) {
 
         showToast('Expense added successfully ✓', 'success');
 
-        await loadExpenses(); // Refresh data
+        await loadExpenses();
 
     } catch (err) {
         console.error('Add error:', err);
 
-        // Handle server-side validation errors (field → message map)
         if (typeof err === 'object' && !err.error) {
             Object.entries(err).forEach(([field, msg]) => {
                 if (['title', 'amount', 'category', 'date'].includes(field)) {
@@ -357,10 +294,6 @@ async function handleFormSubmit(e) {
         setTimeout(() => { formFeedback.textContent = ''; }, 4000);
     }
 }
-
-// ──────────────────────────────────────────────────
-// DELETE — Confirm Modal
-// ──────────────────────────────────────────────────
 
 function confirmDelete(id) {
     pendingDeleteId = id;
@@ -380,7 +313,6 @@ async function handleDeleteConfirm() {
 
     closeModal();
 
-    // Animate card out
     if (card) card.classList.add('removing');
 
     try {
@@ -394,22 +326,13 @@ async function handleDeleteConfirm() {
     }
 }
 
-// ──────────────────────────────────────────────────
-// DATE HEADER
-// ──────────────────────────────────────────────────
-
 function setCurrentDate() {
     const now = new Date();
     document.getElementById('currentDate').textContent =
         now.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
-    // Set today as default date in form
     document.getElementById('date').value = now.toISOString().split('T')[0];
 }
-
-// ──────────────────────────────────────────────────
-// EVENT LISTENERS
-// ──────────────────────────────────────────────────
 
 document.getElementById('expenseForm').addEventListener('submit', handleFormSubmit);
 
@@ -423,27 +346,20 @@ document.getElementById('clearFilter').addEventListener('click', () => {
 document.getElementById('modalCancel').addEventListener('click', closeModal);
 document.getElementById('modalConfirm').addEventListener('click', handleDeleteConfirm);
 
-// Close modal on overlay click
 document.getElementById('modalOverlay').addEventListener('click', (e) => {
     if (e.target.id === 'modalOverlay') closeModal();
 });
 
-// Close modal on Escape key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeModal();
 });
 
-// Clear red border on field focus
 ['title', 'amount', 'category', 'date'].forEach(id => {
     document.getElementById(id).addEventListener('focus', () => {
         document.getElementById(id).style.borderColor = '';
         document.getElementById(`${id}Error`).textContent = '';
     });
 });
-
-// ──────────────────────────────────────────────────
-// INIT — runs when the page loads
-// ──────────────────────────────────────────────────
 
 function init() {
     setCurrentDate();

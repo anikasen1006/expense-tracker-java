@@ -1,10 +1,3 @@
-/* ════════════════════════════════════════════════════
-   ExpenseIQ — CSS
-   Aesthetic: Dark fintech / Bloomberg-meets-modern-app
-   Fonts: Syne (display), DM Sans (body), DM Mono (numbers)
-════════════════════════════════════════════════════ */
-
-/* ── VARIABLES ──────────────────────────────────── */
 :root {
     --bg-base:        #0a0c10;
     --bg-panel:       #111318;
@@ -44,7 +37,6 @@
     --font-mono:      'DM Mono', monospace;
 }
 
-/* ── RESET ──────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; scroll-behavior: smooth; }
 body {
@@ -53,7 +45,6 @@ body {
     font-family: var(--font-body);
     min-height: 100vh;
     line-height: 1.6;
-    /* Soft glowing aura matching dribbble background */
     background-image: 
         radial-gradient(circle at 10% 40%, rgba(38, 204, 219, 0.1), transparent 40%),
         radial-gradient(circle at 85% 60%, rgba(123, 62, 184, 0.1), transparent 45%);
@@ -62,7 +53,6 @@ body {
 input, select, button { font-family: inherit; }
 button { cursor: pointer; border: none; background: none; }
 
-/* ── HEADER ─────────────────────────────────────── */
 .header {
     border-bottom: 1px solid var(--border);
     background: rgba(10, 12, 16, 0.9);
@@ -125,14 +115,12 @@ button { cursor: pointer; border: none; background: none; }
     box-shadow: 0 0 16px rgba(12, 235, 235, 0.4);
 }
 
-/* ── MAIN ───────────────────────────────────────── */
 .main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 32px 24px 64px;
 }
 
-/* ── STAT CARDS ─────────────────────────────────── */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -218,7 +206,6 @@ button { cursor: pointer; border: none; background: none; }
     font-family: var(--font-mono);
 }
 
-/* ── CONTENT GRID ───────────────────────────────── */
 .content-grid {
     display: grid;
     grid-template-columns: 340px 1fr;
@@ -226,7 +213,6 @@ button { cursor: pointer; border: none; background: none; }
     align-items: start;
 }
 
-/* ── PANELS ─────────────────────────────────────── */
 .panel {
     background: rgba(17, 19, 24, 0.6);
     backdrop-filter: blur(20px);
@@ -264,7 +250,6 @@ button { cursor: pointer; border: none; background: none; }
     border: 1px solid rgba(0,229,160,0.2);
 }
 
-/* ── FORM ───────────────────────────────────────── */
 .expense-form {
     padding: 20px 24px;
     border-bottom: 1px solid var(--border);
@@ -300,7 +285,6 @@ button { cursor: pointer; border: none; background: none; }
 }
 .field-input:hover:not(:focus) { border-color: var(--border-light); }
 
-/* Number input arrows hide */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 input[type=date]::-webkit-calendar-picker-indicator {
@@ -382,7 +366,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
 .form-feedback.success { color: var(--accent); }
 .form-feedback.error   { color: var(--red); }
 
-/* ── BREAKDOWN PANEL ────────────────────────────── */
 .breakdown-panel {
     padding: 20px 24px;
 }
@@ -433,7 +416,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
     padding: 12px 0;
 }
 
-/* ── FILTER ROW ─────────────────────────────────── */
 .filter-row {
     display: flex;
     align-items: center;
@@ -450,7 +432,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 .btn-clear:hover { border-color: var(--red); color: var(--red); }
 
-/* ── EXPENSE LIST ───────────────────────────────── */
 .expense-list {
     padding: 16px;
     display: flex;
@@ -463,7 +444,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
 .expense-list::-webkit-scrollbar-track { background: transparent; }
 .expense-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
-/* ── EXPENSE CARD ───────────────────────────────── */
 .expense-card {
     background: rgba(19, 22, 29, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.03);
@@ -568,7 +548,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
     color: var(--red);
 }
 
-/* Category color dots */
 .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
 .dot--Food         { background: var(--yellow); }
 .dot--Transport    { background: var(--blue); }
@@ -580,7 +559,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
 .dot--Travel       { background: var(--accent); }
 .dot--Other        { background: var(--text-muted); }
 
-/* ── LOADING & EMPTY STATES ─────────────────────── */
 .loading-state, .empty-state {
     text-align: center;
     padding: 60px 24px;
@@ -600,7 +578,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
 .empty-title { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--text-secondary); }
 .empty-sub { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
 
-/* ── MODAL ──────────────────────────────────────── */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -650,7 +627,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 .btn-delete-confirm:hover { opacity: 0.85; }
 
-/* ── TOAST ──────────────────────────────────────── */
 .toast {
     position: fixed;
     bottom: 28px;
@@ -676,7 +652,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
 .toast.toast--success { border-color: rgba(0,229,160,0.4); color: var(--accent); }
 .toast.toast--error   { border-color: rgba(255,77,106,0.4); color: var(--red); }
 
-/* ── RESPONSIVE ─────────────────────────────────── */
 @media (max-width: 900px) {
     .content-grid {
         grid-template-columns: 1fr;

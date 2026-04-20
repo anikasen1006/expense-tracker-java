@@ -1,0 +1,7 @@
+com\expensetracker\ExpenseTrackerApplication.class
+com\expensetracker\model\Expense.class
+com\expensetracker\repository\ExpenseRepository.class
+com\expensetracker\service\ExpenseService.class
+com\expensetracker\exception\GlobalExceptionHandler.class
+com\expensetracker\config\CorsConfig.class
+com\expensetracker\controller\ExpenseController.class
