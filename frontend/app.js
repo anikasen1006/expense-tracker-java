@@ -1,4 +1,4 @@
-const API_BASE = 'https://expense-tracker-java-pkqx.onrender.com';
+const API_BASE = 'https://expense-tracker-java.anikasen2006.replit.app';
 
 const CATEGORY_EMOJI = {
     'Food':          '🍔',
