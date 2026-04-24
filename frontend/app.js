@@ -1,4 +1,4 @@
-const API_BASE = '';
+const API_BASE = 'http://localhost:8080/expenses';
 
 const CATEGORY_EMOJI = {
     'Food':          '🍔',
